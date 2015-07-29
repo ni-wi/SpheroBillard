@@ -1,4 +1,5 @@
 package connection;
+
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,15 +11,12 @@ import se.nicklasgavelin.sphero.command.RollCommand;
 
 public class ManualControlHome extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1584552668426797229L;
 
-	private Robot robot;
+	// private Robot robot;
 
 	public ManualControlHome(Robot robot) throws HeadlessException {
-		this.robot = robot;
+		// this.robot = robot;
 		this.setSize(300, 300);
 		this.setTitle("Manual Control");
 		this.setLocationRelativeTo(null);
@@ -32,8 +30,6 @@ public class ManualControlHome extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override

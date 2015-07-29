@@ -19,7 +19,7 @@ import connection.SpheroHome;
 import interfaces.RobotConnectedListener;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
 import se.nicklasgavelin.sphero.Robot;
-import se.nicklasgavelin.sphero.command.RollCommand;
+//import se.nicklasgavelin.sphero.command.RollCommand;
 
 public class UIStart implements RobotConnectedListener {
 
@@ -37,12 +37,17 @@ public class UIStart implements RobotConnectedListener {
 
 			@Override
 			public void run() {
-				System.out.println("thread");
+				for (int i = 0; i < 100; ++i) {
+					System.out.println("(" + i + ") thread running");
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+					}
+				}
 				Point p1 = cam.getCurrentPosition();
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				Point p2 = cam.getCurrentPosition();
@@ -67,7 +72,7 @@ public class UIStart implements RobotConnectedListener {
 						home.setListContent(devNames);
 					}
 				});
-				discover.run();
+				discover.start();
 			}
 		});
 
@@ -75,8 +80,11 @@ public class UIStart implements RobotConnectedListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (!pool.isEmpty()) {
+				if (robot != null) {
+					@SuppressWarnings("unused")
 					ManualControlHome manual = new ManualControlHome(robot);
+				} else {
+					System.err.println("error: couldn't start manual control because robot is null.");
 				}
 			}
 		});
@@ -85,14 +93,13 @@ public class UIStart implements RobotConnectedListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				shitThread.run();
+				shitThread.start();
 				int index = home.getSelectedDevice();
 				if (index != -1) {
 					SpheroConnect connect = new SpheroConnect(devicesFound.get(index));
 					pool.add(connect);
 					connect.setListener(UIStart.this);
-					connect.run();
-
+					connect.start();
 				}
 
 			}
@@ -113,7 +120,6 @@ public class UIStart implements RobotConnectedListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				calibrateSphero();
-
 			}
 		});
 
@@ -121,20 +127,14 @@ public class UIStart implements RobotConnectedListener {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -152,7 +152,6 @@ public class UIStart implements RobotConnectedListener {
 		// try {
 		// Thread.sleep(5000);
 		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// robot.sendCommand(new RollCommand(0, 0.0f, true));
@@ -165,8 +164,8 @@ public class UIStart implements RobotConnectedListener {
 		// //System.out.println(heading);
 		// robot.calibrate((float) heading);
 
-		CaliThread caliThread = new CaliThread(cam, robot);
-		caliThread.start();
+		CaliThread calibrationThread = new CaliThread(cam, robot);
+		calibrationThread.start();
 
 	}
 
@@ -174,5 +173,4 @@ public class UIStart implements RobotConnectedListener {
 	public void connected(Robot robot) {
 		this.robot = robot;
 	}
-
 }

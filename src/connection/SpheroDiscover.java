@@ -5,13 +5,13 @@ import java.util.Collection;
 import se.nicklasgavelin.bluetooth.Bluetooth;
 import se.nicklasgavelin.bluetooth.Bluetooth.EVENT;
 import se.nicklasgavelin.sphero.Robot;
-import se.nicklasgavelin.sphero.command.FrontLEDCommand;
-import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
-import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
+//import se.nicklasgavelin.sphero.command.FrontLEDCommand;
+//import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
+//import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
 import se.nicklasgavelin.bluetooth.BluetoothDiscoveryListener;
 
-public class SpheroDiscover implements Runnable, BluetoothDiscoveryListener {
+public class SpheroDiscover extends Thread implements BluetoothDiscoveryListener {
 
 	DeviceFoundListener deviceFoundListener;
 

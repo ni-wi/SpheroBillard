@@ -1,23 +1,21 @@
 package ui;
 
 import java.awt.Graphics;
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.opencv.highgui.Highgui;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
-import org.opencv.objdetect.CascadeClassifier;
-
-import se.nicklasgavelin.sphero.Robot;
-
-import org.opencv.core.*;
 
 @SuppressWarnings("serial")
 public class VideoCamera extends JPanel implements Runnable {
@@ -122,6 +120,7 @@ public class VideoCamera extends JPanel implements Runnable {
 
 			if (type == 1) {
 				currentSpheroPos = new Point(x, y);
+				System.out.println(currentSpheroPos);
 			}
 
 			int radius = 0;
@@ -144,11 +143,11 @@ public class VideoCamera extends JPanel implements Runnable {
 	}
 
 	public Point getCurrentPosition() {
-		this.repaint();
+		this.updatePosition();
 		return currentSpheroPos;
 	}
 
-	public double calcDifRadius(Point oldPos, Point newPos) {
+	public double calcDiffAngle(Point oldPos, Point newPos) {
 
 		return Math.atan2((newPos.y - oldPos.y), (newPos.x - oldPos.x));
 
@@ -156,19 +155,26 @@ public class VideoCamera extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while (true) {
 			if (this.camera.isOpened())
 				this.repaint();
 			// while (this.camera.isOpened()) {
 			// this.repaint();
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+			}
 		}
 	}
 
 	public void updatePosition() {
+		Mat mat = new Mat();
+
+		if (camera.read(mat)) {
+		}
+		
 		Mat binRot = new Mat();
 		Mat binRot2 = new Mat();
-		Mat mat = new Mat();
 		Mat hsv = new Mat();
 		Imgproc.cvtColor(mat, hsv, Imgproc.COLOR_BGR2HSV);
 
@@ -201,8 +207,5 @@ public class VideoCamera extends JPanel implements Runnable {
 
 				currentSpheroPos = new Point(x, y);
 		}
-
-
-		
 	}
 }

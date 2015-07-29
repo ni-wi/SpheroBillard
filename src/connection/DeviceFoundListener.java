@@ -1,6 +1,6 @@
 package connection;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
 
 public interface DeviceFoundListener {

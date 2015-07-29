@@ -1,31 +1,31 @@
 package ui;
 
-//imports
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayInputStream;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+//import java.awt.Graphics;
+//import java.awt.GridBagConstraints;
+//import java.awt.Image;
+//import java.awt.Insets;
+//import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
+//import java.io.ByteArrayInputStream;
+//import java.io.ByteArrayInputStream;
+//
+//import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
+//import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+//import javax.swing.JLabel;
+//import javax.swing.JPanel;
+//
+//import org.opencv.core.Core;
+//import org.opencv.core.Mat;
+//import org.opencv.core.Mat;
+//import org.opencv.core.MatOfByte;
+//import org.opencv.core.MatOfByte;
+//import org.opencv.highgui.Highgui;
+//import org.opencv.highgui.Highgui;
+//import org.opencv.highgui.VideoCapture;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.core.MatOfByte;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
-
+@SuppressWarnings("serial")
 public class View extends JFrame
 {/*
 	 public static void main (String args[]) throws InterruptedException{

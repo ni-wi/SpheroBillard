@@ -1,8 +1,8 @@
 package connection;
+
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionListener;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,9 +12,6 @@ import javax.swing.ListSelectionModel;
 
 public class SpheroHome extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4605601418605002879L;
 
 	private JPanel mainPanel, buttonPanel, listPanel;

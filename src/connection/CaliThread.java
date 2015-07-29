@@ -25,14 +25,13 @@ public class CaliThread extends Thread {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		robot.sendCommand(new RollCommand(0, 0.0f, true));
 
 		cam.updatePosition();
 		Point newPos = cam.getCurrentPosition();
-		double heading = cam.calcDifRadius(oldPos, newPos);
+		double heading = cam.calcDiffAngle(oldPos, newPos);
 		System.out.println("test");
 		System.out.println(oldPos + " " + newPos);
 		// System.out.println(heading);

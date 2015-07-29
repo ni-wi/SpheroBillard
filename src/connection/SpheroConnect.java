@@ -7,7 +7,7 @@ import se.nicklasgavelin.sphero.command.FrontLEDCommand;
 import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
 import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
 
-public class SpheroConnect implements Runnable {
+public class SpheroConnect extends Thread {
 
 	private BluetoothDevice btDev;
 	private Robot robot;
@@ -32,7 +32,6 @@ public class SpheroConnect implements Runnable {
 			// Add ourselves as listeners for the responses
 			// Check if we can connect
 			if (robot.connect()) {
-
 				if (robotConnectListener != null)
 					robotConnectListener.connected(robot);
 
@@ -44,10 +43,8 @@ public class SpheroConnect implements Runnable {
 				// r.sendCommand(new RollCommand(90, 0.5f, false));
 			}
 		} catch (InvalidRobotAddressException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RobotBluetoothException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
