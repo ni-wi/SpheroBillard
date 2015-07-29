@@ -1,4 +1,4 @@
-package ui;
+package main;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
@@ -19,10 +19,13 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 
-public class openCVTest
+import ui.UIStart;
+import ui.VideoCamera;
+
+public class Main
 {
 
-public openCVTest()
+public Main()
 {
 
     // TODO Auto-generated constructor stub
@@ -38,7 +41,7 @@ public static void main(String[] args) throws IOException
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     //VideoCapture camera = new VideoCapture("http://192.168.0.7/image.jpg");
     VideoCapture camera = new VideoCapture(0);
-
+    
     if (camera.isOpened()) 
     {
         System.out.println("Video is captured");
@@ -48,18 +51,33 @@ public static void main(String[] args) throws IOException
         System.out.println("");
     }
     VideoCamera cam = new VideoCamera(camera);
-
+    UIStart ui = new UIStart(cam);
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     frame.add(cam);
     frame.setSize(800,800);  
     frame.setVisible(true);
 
-
-    while(camera.isOpened())
-    {
-        cam.repaint();
-    }
+//    Thread camThread = new Thread(new VideoCamera(camera));
+//    camThread.start();
+    Thread cameraThread = new Thread()
+	{
+		@Override
+		public void run()
+		{
+			  try {
+				while(camera.isOpened())
+				    {
+				        cam.repaint();
+				    }
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	};
+	cameraThread.start();
 
     
 }
